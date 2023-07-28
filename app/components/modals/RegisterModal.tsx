@@ -96,16 +96,18 @@ const RegisterModal = () => {
       />
       <Button
         outline
-        label="네이버 계정으로 시작하기"
+        label="네이버 계정으로 시작하기(개발중)"
+        disabled
         icon={SiNaver}
         color="text-[#1ec800]"
-        onClick={() => signIn("naver")}
+        onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
       />
       <Button
         outline
-        label="카카오 계정으로 시작하기"
+        label="카카오 계정으로 시작하기(개발중)"
+        disabled
         icon={RiKakaoTalkFill}
-        onClick={() => signIn("kakao")}
+        onClick={() => signIn("kakao", { redirect: true, callbackUrl: "/" })}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap2">

@@ -5,6 +5,8 @@ import { Noto_Sans_KR } from "next/font/google";
 
 import Navbar from "./components/navbar/Navbar";
 import ClientOnly from "./components/ClientOnly";
+import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -25,6 +27,8 @@ export default function RootLayout({
     <html lang="kr">
       <body className={notoSansKr.className}>
         <ClientOnly>
+          <ToasterProvider />
+          <RegisterModal />
           <Navbar />
         </ClientOnly>
         {children}

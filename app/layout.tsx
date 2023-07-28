@@ -14,7 +14,7 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "Camping Reservation App",
+  title: "캠핑 통합 예약 시스템",
   description: "Go and Enjoy the camping!",
 };
 

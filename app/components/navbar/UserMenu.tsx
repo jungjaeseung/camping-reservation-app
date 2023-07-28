@@ -2,13 +2,21 @@
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { useCallback, useState } from "react";
+import { signOut } from "next-auth/react";
+import { SafeUser } from "@/app/types";
 
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
-const UserMenu = () => {
+interface UserMenuProps {
+  currentUser?: SafeUser | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
@@ -22,7 +30,7 @@ const UserMenu = () => {
           onClick={() => {}}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-          어디든 편하게 예약하기
+          {currentUser?.name || "여행 시작하기"}
         </div>
         <div
           onClick={toggleOpen}
@@ -30,17 +38,29 @@ const UserMenu = () => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            <>
-              <MenuItem onClick={() => {}} label="로그인" />
-              <MenuItem onClick={registerModal.onOpen} label="회원가입" />
-            </>
+            {currentUser ? (
+              <>
+                <MenuItem onClick={() => {}} label="여행 기록" />
+                <MenuItem onClick={() => {}} label="즐겨찾기" />
+                <MenuItem onClick={() => {}} label="예약 목록" />
+                <MenuItem onClick={() => {}} label="즐겨찾기" />
+                <MenuItem onClick={() => {}} label="마이페이지" />
+                <hr />
+                <MenuItem onClick={() => signOut()} label="로그아웃" />
+              </>
+            ) : (
+              <>
+                <MenuItem onClick={loginModal.onOpen} label="로그인" />
+                <MenuItem onClick={registerModal.onOpen} label="회원가입" />
+              </>
+            )}
           </div>
         </div>
       )}

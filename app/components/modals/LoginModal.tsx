@@ -55,6 +55,11 @@ const LoginModal = () => {
     });
   };
 
+  const toggle = () => {
+    registerModal.onOpen();
+    loginModal.onClose();
+  };
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
@@ -107,10 +112,7 @@ const LoginModal = () => {
         <div className="flex flex-row justify-center items-center gap2">
           <div>아직 계정이 없으신가요? &nbsp;</div>
           <div
-            onClick={() => {
-              registerModal.onOpen();
-              loginModal.onClose();
-            }}
+            onClick={toggle}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             가입하고 시작하기

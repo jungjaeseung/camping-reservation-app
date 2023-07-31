@@ -9,9 +9,9 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ src }) => {
   return (
     <Image
-      className="rounded-full"
-      height="30"
-      width="30"
+      className="rounded-full w-[30px] h-[30px]"
+      height={30}
+      width={30}
       alt="Avatar"
       src={src || "/images/placeholder.jpg"}
     />

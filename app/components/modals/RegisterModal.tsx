@@ -3,7 +3,7 @@
 import axios from "axios";
 
 import { FcGoogle } from "react-icons/fc";
-import { SiNaver } from "react-icons/si";
+// import { SiNaver } from "react-icons/si";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -94,20 +94,19 @@ const RegisterModal = () => {
         icon={FcGoogle}
         onClick={() => signIn("google")}
       />
-      <Button
+      {/* <Button
         outline
         label="네이버 계정으로 시작하기(개발중)"
         disabled
         icon={SiNaver}
         color="text-[#1ec800]"
         onClick={() => signIn("naver", { redirect: true, callbackUrl: "/" })}
-      />
+      /> */}
       <Button
         outline
-        label="카카오 계정으로 시작하기(개발중)"
-        disabled
+        label="카카오 계정으로 시작하기"
         icon={RiKakaoTalkFill}
-        onClick={() => signIn("kakao", { redirect: true, callbackUrl: "/" })}
+        onClick={() => signIn("kakao")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap2">

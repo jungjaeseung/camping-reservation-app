@@ -27,10 +27,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {}}
+          onClick={() => {
+            if (currentUser) {
+            }
+            if (!currentUser) {
+              loginModal.onOpen();
+            }
+          }}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-          {currentUser?.name || "여행 시작하기"}
+          {currentUser?.name || "로그인하고 시작하세요"}
         </div>
         <div
           onClick={toggleOpen}

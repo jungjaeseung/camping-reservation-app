@@ -55,6 +55,16 @@ const LoginModal = () => {
     });
   };
 
+  const onSocialLogin = (oauth: string) => {
+    setIsLoading(true);
+
+    signIn(`${oauth}`).then(() => {
+      setIsLoading(false);
+
+      toast.success(`${oauth} 계정으로 로그인`);
+    });
+  };
+
   const toggle = () => {
     registerModal.onOpen();
     loginModal.onClose();
@@ -93,7 +103,7 @@ const LoginModal = () => {
         outline
         label="Google 계정으로 로그인"
         icon={FcGoogle}
-        onClick={() => signIn("google")}
+        onClick={() => onSocialLogin("google")}
       />
       {/* <Button
         outline
@@ -106,7 +116,7 @@ const LoginModal = () => {
         outline
         label="카카오 계정으로 로그인"
         icon={RiKakaoTalkFill}
-        onClick={() => signIn("kakao")}
+        onClick={() => onSocialLogin("kakao")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row justify-center items-center gap2">

@@ -9,6 +9,7 @@ import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useRentModal from "@/app/hooks/useRentModal";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -17,26 +18,30 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => {
-            if (currentUser) {
-            }
-            if (!currentUser) {
-              loginModal.onOpen();
-            }
-          }}
+          onClick={onRent}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
-          {currentUser?.name || "로그인하고 시작하세요"}
+          {currentUser ? "빠른 예약" : "로그인하고 시작하세요"}
         </div>
         <div
           onClick={toggleOpen}
@@ -57,7 +62,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem onClick={() => {}} label="즐겨찾기" />
                 <MenuItem onClick={() => {}} label="예약 목록" />
                 <MenuItem onClick={() => {}} label="즐겨찾기" />
-                <MenuItem onClick={() => {}} label="마이페이지" />
+                <MenuItem onClick={rentModal.onOpen} label="빠른 예약" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="로그아웃" />
               </>
